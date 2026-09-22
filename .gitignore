@@ -1,4 +1,23 @@
+# Environment
 .env
 .venv/
-chroma_db/
+
+# Python
 __pycache__/
+*.py[cod]
+*.pyo
+
+# ChromaDB
+chroma_db/
+
+# Next.js
+frontend/.next/
+frontend/node_modules/
+frontend/out/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

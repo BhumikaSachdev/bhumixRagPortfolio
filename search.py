@@ -21,7 +21,8 @@ if not GEMINI_API_KEY:
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
-CHROMA_PATH = "./chroma_db"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CHROMA_PATH = os.path.join(BASE_DIR, "chroma_db")
 COLLECTION_NAME = "bhumika_profile"
 
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
@@ -30,8 +31,15 @@ RERANKER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 TOP_K_VECTOR = 12
 TOP_K_FINAL = 5
 
-PRIMARY_MODEL = "gemini-3.6-flash"
-BACKUP_MODEL = "gemini-3.5-flash-lite"
+PRIMARY_MODEL = os.getenv(
+    "GEMINI_MODEL",
+    "gemini-3.6-flash"
+)
+
+BACKUP_MODEL = os.getenv(
+    "GEMINI_BACKUP_MODEL",
+    ""
+)
 
 
 # ============================================================
@@ -1018,7 +1026,6 @@ def clean_answer(answer):
 # ============================================================
 
 def generate_answer(query, results):
-
     context = build_context(results)
 
     prompt = f"""
@@ -1063,13 +1070,13 @@ Important rules:
 
 12. Do NOT use Markdown formatting.
 
-13. Do NOT use asterisks (* or **).
+13. Do NOT use asterisks.
 
-14. Do NOT use bullet points such as -, *, or +.
+14. Do NOT use bullet points.
 
 15. Do NOT use numbered lists.
 
-16. Do NOT use Markdown headings such as # or ##.
+16. Do NOT use Markdown headings.
 
 17. Use short paragraphs and simple section labels when helpful.
 
@@ -1097,18 +1104,22 @@ Context:
 
         print(f"Primary LLM succeeded: {PRIMARY_MODEL}")
 
-        return response.text
+        return clean_answer(response.text)
 
     except Exception as primary_error:
-
         print("\nPrimary LLM failed.")
         print(f"Model: {PRIMARY_MODEL}")
         print(f"Error: {primary_error}")
 
+        if not BACKUP_MODEL:
+            return (
+                "I'm temporarily unable to generate a response. "
+                "Please try again in a moment."
+            )
+
         print(f"\nFalling back to backup LLM: {BACKUP_MODEL}")
 
         try:
-
             response = client.models.generate_content(
                 model=BACKUP_MODEL,
                 contents=prompt,
@@ -1116,10 +1127,9 @@ Context:
 
             print(f"Backup LLM succeeded: {BACKUP_MODEL}")
 
-            return response.text
+            return clean_answer(response.text)
 
         except Exception as backup_error:
-
             print("\nBackup LLM also failed.")
             print(f"Model: {BACKUP_MODEL}")
             print(f"Error: {backup_error}")
@@ -1128,8 +1138,6 @@ Context:
                 "I'm temporarily unable to generate a response. "
                 "Please try again in a moment."
             )
-
-    return clean_answer(response.text)
 
 
 # ============================================================

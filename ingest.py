@@ -9,12 +9,13 @@ import chromadb
 # 1. FILE PATHS
 # ============================================================
 
-PDF_PATH = Path("data/Bhumika_Profile.pdf")
-MD_PATH = Path("data/Accenture_work.md")
+BASE_DIR = Path(__file__).resolve().parent
 
-CHROMA_PATH = "chroma_db"
+PDF_PATH = BASE_DIR / "data" / "Bhumika_Profile.pdf"
+MD_PATH = BASE_DIR / "data" / "Accenture_work.md"
+
+CHROMA_PATH = str(BASE_DIR / "chroma_db")
 COLLECTION_NAME = "bhumika_profile"
-
 
 # ============================================================
 # 2. TEXT SPLITTER
