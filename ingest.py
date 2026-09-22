@@ -3,6 +3,7 @@ from pypdf import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
 import chromadb
+import os
 
 
 # ============================================================
@@ -14,7 +15,11 @@ BASE_DIR = Path(__file__).resolve().parent
 PDF_PATH = BASE_DIR / "data" / "Bhumika_Profile.pdf"
 MD_PATH = BASE_DIR / "data" / "Accenture_work.md"
 
-CHROMA_PATH = str(BASE_DIR / "chroma_db")
+CHROMA_PATH = os.getenv(
+    "CHROMA_PATH",
+    str(BASE_DIR / "chroma_db")
+)
+
 COLLECTION_NAME = "bhumika_profile"
 
 # ============================================================
