@@ -43,7 +43,7 @@ PRIMARY_MODEL = os.getenv(
 
 BACKUP_MODEL = os.getenv(
     "GEMINI_BACKUP_MODEL",
-    ""
+    "gemini-3.5-flash-lite"
 )
 
 
