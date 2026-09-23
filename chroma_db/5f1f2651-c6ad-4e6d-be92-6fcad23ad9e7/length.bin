@@ -1,0 +1,1 @@
+invalid type: string "The experience provided exposure to the complete AI application pipeline:\n\nData ingestion\n→ document intelligence\n→ semantic chunking\n→ embeddings\n→ hybrid retrieval\n→ reranking\n→ graph reasoning\n→ agentic orchestration\n→ grounded LLM generation\n→ evaluation\n→ enterprise application integration.", expected a booleanise use cases.", expected i64
