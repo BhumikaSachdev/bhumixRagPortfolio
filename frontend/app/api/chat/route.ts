@@ -5,7 +5,7 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     const response = await fetch(
-      "http://127.0.0.1:8000/chat",
+      "https://bhumika-ai-904259363480.asia-south1.run.app/chat",
       {
         method: "POST",
         headers: {
