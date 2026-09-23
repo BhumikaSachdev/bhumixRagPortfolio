@@ -96,16 +96,10 @@ return ( <section
 
       {/* Visual panel */}
 
-      <div className="relative aspect-[4/5] min-h-[430px] overflow-hidden border border-[#f8eee9]/15 bg-[#24121d] sm:min-h-[500px]">
+      <div className="group relative aspect-[4/5] min-h-[430px] overflow-hidden border border-[#f8eee9]/15 bg-[#24121d] sm:min-h-[500px]">
 
         {/* Decorative orbital elements */}
-
-        <div className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#e7a9bd]/30 sm:h-48 sm:w-48" />
-
-        <div className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#e7a9bd]/20 sm:h-32 sm:w-32" />
-
-        <div className="absolute left-1/2 top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f4b6cb] shadow-[0_0_35px_rgba(244,182,203,0.7)] sm:h-4 sm:w-4 sm:shadow-[0_0_40px_rgba(244,182,203,0.7)]" />
-
+        
         <div className="absolute left-[15%] top-[12%] h-1.5 w-1.5 rounded-full bg-[#e7a9bd]" />
 
         <div className="absolute right-[18%] top-[30%] h-1 w-1 rounded-full bg-[#f8eee9]" />
@@ -113,12 +107,20 @@ return ( <section
         <div className="absolute bottom-[20%] left-[25%] h-1 w-1 rounded-full bg-[#e7a9bd]" />
 
 
-        {/* Large monogram */}
+        {/* Portrait */}
 
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="font-serif text-[10rem] font-light leading-none text-[#f8eee9]/[0.06] sm:text-[14rem]">
-            B
-          </span>
+        <div className="absolute inset-0">
+          <img
+            src="/bhumikapfp.jpeg"
+            alt="Bhumika"
+            className="h-full w-full object-cover object-center opacity-90 transition-all duration-700 group-hover:scale-[1.03] group-hover:opacity-100"
+          />
+
+          {/* Atmospheric overlay */}
+          <div className="absolute inset-0 bg-[#160b13]/20" />
+
+          {/* Soft pink glow */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#160b13]/70 via-transparent to-[#c85c86]/10" />
         </div>
 
 
